@@ -39,7 +39,7 @@ const dbUrl= process.env.db_url;
 //     console.log("database connected");
 // });
 
-
+mongoose.Promise=global.Promise;
 const connectDB = async () => {
     try {
       const conn = await mongoose.connect(dbUrl);

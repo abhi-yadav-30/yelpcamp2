@@ -49,16 +49,16 @@ const dbUrl= process.env.db_url;
 //   await mongoose.connect(dbUrl);
 // }
 
-const connectDB = async () => {
+
     try {
-      const conn = await mongoose.connect(dbUrl);
-      console.log(`MongoDB Connected: ${conn.connection.host}`);
+      mongoose.connect(dbUrl);
+      console.log(`MongoDB Connected:`);
     } 
     catch (error) {
       console.log(error);
       process.exit(1);
     }
-  }
+
 
 
 const app= express();
@@ -192,8 +192,6 @@ app.use((err,req,res,next)=>{
 //     console.log(`lisining on port ${PORT}`);
 // })
 
-connectDB().then(() => {
     app.listen(PORT, () => {
         console.log(`listening for requests on port ${PORT}`);
     })
-})

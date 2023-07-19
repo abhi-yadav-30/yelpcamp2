@@ -30,18 +30,18 @@ const MongoStore = require('connect-mongo');
 const dbUrl= process.env.db_url;
 // 'mongodb://127.0.0.1:27017/Yelp-camp'
 
+mongoose.Promise=global.Promise;
+
+mongoose.connect(dbUrl);
+const db = mongoose.connection;
+
+db.on("error",console.error.bind(console,"connection error:"));
+db.once("open",()=>{
+    console.log("database connected");
+});
 
 
-// mongoose.connect('mongodb://127.0.0.1:27017/Yelp-camp');
-// const db = mongoose.connection;
 
-// db.on("error",console.error.bind(console,"connection error:"));
-// db.once("open",()=>{
-//     console.log("database connected");
-// });
-
-
- mongoose.Promise=global.Promise;
  
 // main().catch(err => console.log(err));
 
@@ -49,17 +49,17 @@ const dbUrl= process.env.db_url;
 //   await mongoose.connect(dbUrl);
 // }
 
-
-    try {
-      mongoose.connect(dbUrl);
-      console.log(`MongoDB Connected:`);
-    } 
-    catch (error) {
-      console.log(error);
-      process.exit(1);
-    }
-
-
+// const connectDB = async () => {
+//     try {
+//       const conn = await mongoose.connect(dbUrl);
+//       console.log(`MongoDB Connected: ${conn.connection.host}`);
+//     } 
+//     catch (error) {
+//       console.log(error);
+//       process.exit(1);
+//     }
+//   }
+// connectDB;
 
 const app= express();
 app.engine('ejs',ejsMate);
@@ -191,6 +191,7 @@ app.use((err,req,res,next)=>{
 // app.listen(PORT,()=>{
 //     console.log(`lisining on port ${PORT}`);
 // })
+
 
     app.listen(PORT, () => {
         console.log(`listening for requests on port ${PORT}`);

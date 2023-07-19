@@ -40,12 +40,15 @@ const dbUrl= process.env.db_url;
 //     console.log("database connected");
 // });
 
+
+ mongoose.Promise=global.Promise;
+ 
 main().catch(err => console.log(err));
 
 async function main() {
   await mongoose.connect(dbUrl);
 }
-// mongoose.Promise=global.Promise;
+
 // const connectDB = async () => {
 //     try {
 //       const conn = await mongoose.connect(dbUrl);

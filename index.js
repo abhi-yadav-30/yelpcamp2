@@ -51,8 +51,11 @@ const dbUrl= process.env.db_url;
 
 const connectDB = async () => {
     try {
-      const conn = await mongoose.connect(dbUrl);
-      console.log(`MongoDB Connected: ${conn.connection.host}`);
+      const conn = await mongoose.connect(dbUrl)
+      .then(res => console.log("Connected to DB"))
+      .catch(err => console.log(err))
+    //   console.log(`MongoDB Connected: ${conn.connection.host}`);
+      
     } 
     catch (error) {
       console.log(error);

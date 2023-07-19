@@ -42,23 +42,23 @@ const dbUrl= process.env.db_url;
 
 
  mongoose.Promise=global.Promise;
+ 
+// main().catch(err => console.log(err));
 
-main().catch(err => console.log(err));
+// async function main() {
+//   await mongoose.connect(dbUrl);
+// }
 
-async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/Yelp-camp');
-}
-
-// const connectDB = async () => {
-//     try {
-//       const conn = await mongoose.connect(dbUrl);
-//       console.log(`MongoDB Connected: ${conn.connection.host}`);
-//     } 
-//     catch (error) {
-//       console.log(error);
-//       process.exit(1);
-//     }
-//   }
+const connectDB = async () => {
+    try {
+      const conn = await mongoose.connect(dbUrl);
+      console.log(`MongoDB Connected: ${conn.connection.host}`);
+    } 
+    catch (error) {
+      console.log(error);
+      process.exit(1);
+    }
+  }
 
 
 const app= express();
@@ -74,7 +74,7 @@ const secret=process.env.SECRET || 'thisshouldbesecret'
 
 
 const store = MongoStore.create({
-    mongoUrl:'mongodb://127.0.0.1:27017/Yelp-camp', 
+    mongoUrl:dbUrl, 
     touchAfter: 24 * 60 * 60,
     crypto: {
         secret
@@ -188,12 +188,12 @@ app.use((err,req,res,next)=>{
     res.status(satusCode).render('errors',{err});
 })
 
-app.listen(PORT,()=>{
-    console.log(`lisining on port ${PORT}`);
-})
-
-// connectDB().then(() => {
-//     app.listen(PORT, () => {
-//         console.log(`listening for requests on port ${PORT}`);
-//     })
+// app.listen(PORT,()=>{
+//     console.log(`lisining on port ${PORT}`);
 // })
+
+connectDB().then(() => {
+    app.listen(PORT, () => {
+        console.log(`listening for requests on port ${PORT}`);
+    })
+})

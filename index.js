@@ -44,7 +44,8 @@ const connectDB = async () => {
     try {
       const conn = await mongoose.connect(dbUrl);
       console.log(`MongoDB Connected: ${conn.connection.host}`);
-    } catch (error) {
+    } 
+    catch (error) {
       console.log(error);
       process.exit(1);
     }
@@ -178,12 +179,12 @@ app.use((err,req,res,next)=>{
     res.status(satusCode).render('errors',{err});
 })
 
-// app.listen(3000,()=>{
-//     console.log('lisining on port 3000');
-// })
-
-connectDB().then(() => {
-    app.listen(PORT, () => {
-        console.log(`listening for requests on port ${PORT}`);
-    })
+app.listen(PORT,()=>{
+    console.log(`lisining on port ${PORT}`);
 })
+
+// connectDB().then(() => {
+//     app.listen(PORT, () => {
+//         console.log(`listening for requests on port ${PORT}`);
+//     })
+// })

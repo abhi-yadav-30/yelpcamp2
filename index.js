@@ -42,11 +42,11 @@ const dbUrl= process.env.db_url;
 
 
  mongoose.Promise=global.Promise;
- 
+
 main().catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect(dbUrl);
+  await mongoose.connect('mongodb://127.0.0.1:27017/Yelp-camp');
 }
 
 // const connectDB = async () => {
@@ -74,7 +74,7 @@ const secret=process.env.SECRET || 'thisshouldbesecret'
 
 
 const store = MongoStore.create({
-    mongoUrl:dbUrl, 
+    mongoUrl:'mongodb://127.0.0.1:27017/Yelp-camp', 
     touchAfter: 24 * 60 * 60,
     crypto: {
         secret

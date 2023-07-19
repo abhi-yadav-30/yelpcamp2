@@ -34,22 +34,28 @@ const dbUrl= process.env.db_url;
 
 // mongoose.connect('mongodb://127.0.0.1:27017/Yelp-camp');
 // const db = mongoose.connection;
+
 // db.on("error",console.error.bind(console,"connection error:"));
 // db.once("open",()=>{
 //     console.log("database connected");
 // });
 
-mongoose.Promise=global.Promise;
-const connectDB = async () => {
-    try {
-      const conn = await mongoose.connect(dbUrl);
-      console.log(`MongoDB Connected: ${conn.connection.host}`);
-    } 
-    catch (error) {
-      console.log(error);
-      process.exit(1);
-    }
-  }
+main().catch(err => console.log(err));
+
+async function main() {
+  await mongoose.connect(dbUrl);
+}
+// mongoose.Promise=global.Promise;
+// const connectDB = async () => {
+//     try {
+//       const conn = await mongoose.connect(dbUrl);
+//       console.log(`MongoDB Connected: ${conn.connection.host}`);
+//     } 
+//     catch (error) {
+//       console.log(error);
+//       process.exit(1);
+//     }
+//   }
 
 
 const app= express();

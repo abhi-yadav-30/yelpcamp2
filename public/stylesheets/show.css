@@ -1,0 +1,19 @@
+@media(max-width:771px)
+{
+    .row{
+        display: flex;
+        flex-direction: column;
+        /* height: 800px; */
+        justify-content: center;
+   }
+   .col-6{
+    top: 0px;
+    /* height:400px; */
+    width: 60%;
+    display:inline-block;
+    
+    margin-left: 120px;
+    padding: 0px;
+}
+
+}
